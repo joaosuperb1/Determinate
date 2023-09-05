@@ -5,6 +5,33 @@ using namespace std;
 
 // https://github.com/tqdm/tqdm.cpp
 
+void Matriz_1x1(){
+
+    int M1[1][1];
+    int i, j;
+    i = 0;
+    j = 0;
+
+    // Preencher Matriz:
+    
+	
+    cout << "digite o valor da posicao " << i + 1 << "'" << j + 1 << " : " ;
+            cin >> M1[i][j];
+
+	cout << "\n" << endl;
+	
+	// Imprimir Matriz: 
+	
+    cout << "Imprimindo Matriz: \n" << endl;
+    
+	cout << "[" << M1[i][j] << "]" << endl;
+
+    int Deter = M1[i][j];
+
+    cout << "\nO determinante da matriz eh: " << Deter << "\n" <<endl;
+
+}
+
 void Matriz_2x2(){
 
     int M2[2][2];
@@ -108,7 +135,7 @@ void Matriz_3x3(){
 
 int main(){
 
-    int tamMatriz = 1;
+    int tamMatriz = 0;
 
     cout << "-------------------------------------" << endl;
     cout << "      IF Sudeste MG - Rio Pomba" << endl;
@@ -116,17 +143,19 @@ int main(){
     cout << "-------------------------------------" << endl;
     cout << "Digite qual o tamanho da matriz:" << endl;
 
-	while(tamMatriz == 1){
+	while(tamMatriz == 0){
 		
 		cin >> tamMatriz;
 		
 		if(tamMatriz == 1){
-			cout << "Erro, Matriz de tamanho 1! Escreva novamente o tamanho desejado. :D " << endl;
+			cout << "Erro, Matriz de tamanho 0! Escreva novamente o tamanho desejado. :D " << endl;
 		}
 	}
     
 
-    if (tamMatriz == 2){
+    if (tamMatriz == 1){
+        Matriz_1x1();
+    }else if(tamMatriz == 2){
         Matriz_2x2();
     }else if(tamMatriz == 3){
         Matriz_3x3();
