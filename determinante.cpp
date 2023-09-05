@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <ostream>
+#include <iostream>
 using namespace std;
 
 void Matriz_2x2(){
@@ -50,7 +50,7 @@ void Matriz_3x3(){
 
 }
 
-void Matriz_NxN(tamMatriz){
+/*void Matriz_NxN(tamMatriz){
 
     int t = tamMatriz
     int MN[t][t];
@@ -64,7 +64,7 @@ void Matriz_NxN(tamMatriz){
     
 
 
-}
+}*/
 
 int main(){
 
@@ -83,7 +83,7 @@ int main(){
     }else if(tamMatriz == 3){
         Matriz_3x3();
     }else{
-        Matriz_NxN(tamMatriz);
+        //Matriz_NxN(tamMatriz);
     }
     
 
