@@ -5,14 +5,16 @@ using namespace std;
 //    int const TAM = 4;
 // https://github.com/tqdm/tqdm.cpp
 
-int preencherMatrizNxN(int tamMatriz, int M[4][4]){
+int** preencherMatrizNxN(int tamMatriz){
+    int** M = new int*[tamMatriz];
     for(int i = 0; i < tamMatriz ; i++){
+        M[i] = new int[tamMatriz];
         for(int j = 0; j < tamMatriz; j++){
             M[i][j] = j+1;
             cout << "Posicao 1 preencida com o valor: " << j + 1 << endl ;
         }
     }
-    return M[4][4];
+    return M;
 }
 int CalcMatriz3x3(int M3[3][3]){
     return M3[0][0] * ((M3[1][1]*M3[2][2]) - (M3[2][1]*M3[1][2])) -M3[0][1] * (M3[1][0]
@@ -135,7 +137,7 @@ void Matriz_4x4(){
 
     int tamMatriz = 4;
     int Deter1;
-    int M4[4][4] = {0};
+    int** M4;
 
     int M3Apoio[3][3] = {0};
     int M3Apoio2[3][3] = {0};
@@ -156,7 +158,7 @@ void Matriz_4x4(){
         	    cout << "Posicao 1 preencida com o valor: " << j + 1 << endl ;
             }
         }*/
-        M4 = preencherMatrizNxN(tamMatriz, M4);
+        M4 = preencherMatrizNxN(tamMatriz);
     }else{
         cout << "Digite os valores:" << endl;
         for(i = 0; i < 4 ; i++){
@@ -352,6 +354,12 @@ void Matriz_4x4(){
 
     // Calculando o determinante de de M3:
     //cout << "\nO determinante da matriz eh: " << Deter << endl;
+
+    // Não se esqueça de liberar a memória alocada quando não precisar mais dela.
+    for (int i = 0; i < 4; i++) {
+        delete[] M4[i];
+    }
+    delete[] M4;
 
 }
 
