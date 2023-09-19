@@ -2,8 +2,22 @@
 #include <iostream>
 
 using namespace std;
-
+//    int const TAM = 4;
 // https://github.com/tqdm/tqdm.cpp
+
+int preencherMatrizNxN(int tamMatriz, int M[4][4]){
+    for(int i = 0; i < tamMatriz ; i++){
+        for(int j = 0; j < tamMatriz; j++){
+            M[i][j] = j+1;
+            cout << "Posicao 1 preencida com o valor: " << j + 1 << endl ;
+        }
+    }
+    return M[4][4];
+}
+int CalcMatriz3x3(int M3[3][3]){
+    return M3[0][0] * ((M3[1][1]*M3[2][2]) - (M3[2][1]*M3[1][2])) -M3[0][1] * (M3[1][0]
+    * M3[2][2] - M3[2][0] * M3[1][2]) + M3[0][2] * (M3[1][0] * M3[2][1] - M3[2][0] * M3[1][1]);
+}
 
 void Matriz_1x1(){
 
@@ -119,27 +133,43 @@ void Matriz_3x3(){
 
 void Matriz_4x4(){
 
-//    int Deter;
-    int M4[4][4];
-    int M3Apoio[3][3];
+    int tamMatriz = 4;
+    int Deter1;
+    int M4[4][4] = {0};
+
+    int M3Apoio[3][3] = {0};
+    int M3Apoio2[3][3] = {0};
+    int M3Apoio3[3][3] = {0};
+    int M3Apoio4[3][3] = {0};
     int i, j;
 
     // Preencher Matriz:
-    
-	cout << "Digite os valores:" << endl;
-	
-    for(i = 0; i < 4 ; i++){
-        for(j = 0; j < 4; j++){
-        	cout << "digite o valor da posicao " << i + 1 << "'" << j + 1 << " : " ;
-            cin >> M4[i][j];
-            
+
+    int digi = 0;
+    cout << "Deseja preencher matriz com 123...n...? Digite 1 par sim e qualquer outro numero para não." << endl;
+    cin >> digi;
+
+    if(digi == 1){
+        /*for(i = 0; i < 4 ; i++){
+            for(j = 0; j < 4; j++){
+                M4[i][j] = j+1;
+        	    cout << "Posicao 1 preencida com o valor: " << j + 1 << endl ;
+            }
+        }*/
+        M4 = preencherMatrizNxN(tamMatriz, M4);
+    }else{
+        cout << "Digite os valores:" << endl;
+        for(i = 0; i < 4 ; i++){
+            for(j = 0; j < 4; j++){
+        	    cout << "digite o valor da posicao " << i + 1 << "'" << j + 1 << " : " ;
+                cin >> M4[i][j]; 
+            }
         }
     }
     
-	// Imprimir Matriz: 
-	
-    cout << "\nImprimindo Matriz: \n" << endl;
-    
+	// Imprimir Matriz4x4: 
+
+    cout << "\nImprimindo Matriz4x4:" << endl; 
     for(i = 0; i < 4 ; i++){
         for(j = 0; j < 4; j++){
             
@@ -152,59 +182,175 @@ void Matriz_4x4(){
         }
     }
 
-    // Fazendo a Matriz de apoio
-
-    int k = 0;
-    int l = 0;
-
-    for(i = 0; i < 3; i++){
+    cout << "\nImprimindo Matriz de apoio zerada:" << endl;
+    for(i = 0; i < 3 ; i++){
         for(j = 0; j < 3; j++){
-            cout << i << " " << j << endl;
-            if(i == 0 || j == 0){
-                //int teste;
-                cout << "i ou j = 0\n";
-                //cin >> teste;
-                //cout << teste << "teste" << endl;
-                
-            }else{
-
-                M3Apoio[k][l] = M4[i][j];
-                cout << "imprimindo m3apoio " <<  M3Apoio[k][l] << endl;
-                
-            }
-            cout << "Imprime Apoio de novo" <<  M3Apoio[k][l] << endl;
-            l++;
-
+			if(j < 2){
+				cout << "[" << M3Apoio[i][j] << "]";
+			}else{
+				cout << "[" << M3Apoio[i][j] << "]" << endl;
+			}
         }
-        cout << "Imprime Apoio de novo" << M3Apoio[k][l] << endl;
-        k++;
     }
 
-    // Imprimir Matriz Apoio: 
-	
-    cout << "\nImprimindo Matriz de apoio: \n" << endl;
-    
-    for(k = 0; k < 3 ; k++){
-        for(l = 0; l < 3; l++){
+    // Fazendo a Matriz de apoio1 e Imprimindo
+    //            1
+    cout << "\nfazendo matriz de apoio1..."<< endl;
+    for(i = 0; i < 4; i++){ 
+        for(j = 0; j < 4; j++){
+            if(i == 0 || j == 0){
+
+                
+            }else{
+                //cout << i << j << endl;
+                //cout << "matrixOriginalValor: " << M4[i][j];
+                //cout << "matrixApoio: " << M3Apoio[i][j];
+                M3Apoio[i-1][j-1] = M4[i][j];
+                //cout << "imprimindo m3apoio " <<  M3Apoio[i-1][j-1] << endl;
+                
+            }
             
-			if(l < 2){
-                int t;
-				cout << "[" << M3Apoio[k][l] << "]";
-                cin >> t;
+        }
+    }
+
+    cout << "Imprimindo Matriz de apoio1:" << endl;
+    for(i = 0; i < 3 ; i++){
+        for(j = 0; j < 3; j++){
+            
+			if(j < 2){
+                //int t;
+				cout << "[" << M3Apoio[i][j] << "]";
+                //cin >> t;
 			}else{
-                int t;
-				cout << "[" << M3Apoio[k][l] << "]" << endl;
-                cin >> t;
+                //int t;
+				cout << "[" << M3Apoio[i][j] << "]" << endl;
+                //cin >> t;
+			}
+        
+        }
+    }
+
+    Deter1 = CalcMatriz3x3(M3Apoio);
+    cout << "Determinante da matriz M3Apoio eh: " << Deter1 << endl;
+
+
+    // Fazendo a Matriz de apoio2 e Imprimindo
+    //            2
+
+    cout << "\nfazendo matriz de apoio2..."<< endl;
+    for(i = 0; i < 4; i++){ 
+        for(j = 0; j < 4; j++){
+            if(i == 0 || j == 0){
+
+                
+            }else{
+                //cout << i << j << endl;
+                //cout << "matrixOriginalValor: " << M4[i][j];
+                //cout << "matrixApoio: " << M3Apoio[i][j];
+                M3Apoio2[i-1][j-1] = M4[i][j];
+                //cout << "imprimindo m3apoio " <<  M3Apoio[i-1][j-1] << endl;
+                
+            }
+            
+        }
+    } 
+	
+    cout << "Imprimindo Matriz de apoio2:" << endl;
+    for(i = 0; i < 3 ; i++){
+        for(j = 0; j < 3; j++){
+            
+			if(j < 2){
+                //int t;
+				cout << "[" << M3Apoio2[i][j] << "]";
+                //cin >> t;
+			}else{
+                //int t;
+				cout << "[" << M3Apoio2[i][j] << "]" << endl;
+                //cin >> t;
+			}
+        
+        }
+    }
+
+    // Fazendo a Matriz de apoio3 e Imprimindo
+    //            3
+
+    cout << "\nfazendo matriz de apoio3..."<< endl;
+    for(i = 0; i < 4; i++){ 
+        for(j = 0; j < 4; j++){
+            if(i == 0 || j == 0){
+
+                
+            }else{
+                //cout << i << j << endl;
+                //cout << "matrixOriginalValor: " << M4[i][j];
+                //cout << "matrixApoio: " << M3Apoio[i][j];
+                M3Apoio3[i-1][j-1] = M4[i][j];
+                //cout << "imprimindo m3apoio " <<  M3Apoio[i-1][j-1] << endl;
+                
+            }
+            
+        }
+    }
+
+    cout << "Imprimindo Matriz de apoio3:" << endl;
+    for(i = 0; i < 3 ; i++){
+        for(j = 0; j < 3; j++){
+            
+			if(j < 2){
+                //int t;
+				cout << "[" << M3Apoio3[i][j] << "]";
+                //cin >> t;
+			}else{
+                //int t;
+				cout << "[" << M3Apoio3[i][j] << "]" << endl;
+                //cin >> t;
+			}
+        
+        }
+    }
+
+    // Fazendo a Matriz de apoio4 e Imprimindo
+    //            4
+    cout << "\nfazendo matriz de apoio4..."<< endl;
+
+    for(i = 0; i < 4; i++){ 
+        for(j = 0; j < 4; j++){
+            if(i == 0 || j == 0){
+
+                
+            }else{
+                //cout << i << j << endl;
+                //cout << "matrixOriginalValor: " << M4[i][j];
+                //cout << "matrixApoio: " << M3Apoio[i][j];
+                M3Apoio4[i-1][j-1] = M4[i][j];
+                //cout << "imprimindo m3apoio " <<  M3Apoio[i-1][j-1] << endl;
+                
+            }
+            
+        }
+    }
+
+    cout << "Imprimindo Matriz de apoio4: \n" << endl;
+    for(i = 0; i < 3 ; i++){
+        for(j = 0; j < 3; j++){
+            
+			if(j < 2){
+                //int t;
+				cout << "[" << M3Apoio4[i][j] << "]";
+                //cin >> t;
+			}else{
+                //int t;
+				cout << "[" << M3Apoio4[i][j] << "]" << endl;
+                //cin >> t;
 			}
         
         }
     }
 
 
-    // Calculando o determinante de de M3:
 
-    
-    
+    // Calculando o determinante de de M3:
     //cout << "\nO determinante da matriz eh: " << Deter << endl;
 
 }
