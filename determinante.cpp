@@ -11,7 +11,6 @@ int** preencherMatrizNxN(int tamMatriz){
         M[i] = new int[tamMatriz];
         for(int j = 0; j < tamMatriz; j++){
             M[i][j] = j+1;
-            cout << "Posicao 1 preencida com o valor: " << j + 1 << endl ;
         }
     }
     return M;
